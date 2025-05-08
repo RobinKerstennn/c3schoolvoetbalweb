@@ -41,5 +41,8 @@ use App\Http\Controllers\TeamsController;
 Route::get('/teambeheer', [TeamsController::class, 'index'])->name('teams.index');
 Route::post('/teambeheer', [TeamsController::class, 'store'])->name('teams.store');
 Route::get('/mijn-team', [TeamsController::class, 'mijnTeam'])->name('teams.mijnTeam');
+Route::get('/teams/{team}/edit', [TeamsController::class, 'edit'])->name('teams.edit');
+Route::get('/teams/{team}', [TeamsController::class, 'update'])->name('teams.update');
+
 
 require __DIR__.'/auth.php';

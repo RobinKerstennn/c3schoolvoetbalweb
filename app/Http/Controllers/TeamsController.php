@@ -14,6 +14,18 @@ class TeamsController extends Controller
         $teams = Team::all();
         return view('teams.teambeheer', ['teams' => $teams, 'user' => $user]);
     }
+
+    public function edit($id)
+    {
+        $team = Team::find($id);
+
+        if (!$team) {
+            return redirect()->route('teams.index')->withErrors('Teams niet gevonden.');
+        }
+
+        return view('teams.edit', compact('team'));
+    }
+
     public function mijnTeam()
     {
         $mijnTeam = Auth::user()->team;
@@ -32,5 +44,12 @@ class TeamsController extends Controller
         ]);
 
         return redirect()->route('teams.index')->with('success', 'Team succesvol aangemaakt!');
+    }
+
+    public function update(Request $request, $id){
+        $team = Team::find($id);
+        $team->update($request->all());
+        return redirect()->route('teams.index')->with('succes!', 'Team succesvol aangepast.');
+
     }
 }
