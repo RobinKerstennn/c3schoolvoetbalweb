@@ -9,12 +9,13 @@ class Team extends Model
 {
     protected $fillable = [
         'name',
-        'players' => '[]',
+        'players',
+        'user_id',
     ];
 
     // Relatie met de User
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 }

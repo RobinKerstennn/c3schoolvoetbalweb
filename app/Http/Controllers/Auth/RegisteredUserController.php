@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Team;
 use App\Models\User;
+use App\Models\Team;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -37,10 +37,6 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $mijnTeam =Team::create([
-            'name' =>$request->name,
-            'players' => [''],
-        ]);
 
         $user = User::create([
             'name' => $request->name,
@@ -48,9 +44,16 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+
         event(new Registered($user));
 
         Auth::login($user);
+
+        $mijnTeam = Team::create([
+            'name' =>$request->name,
+            'players' => json_encode([]),
+            'user_id' => Auth::id(),
+        ]);
 
         return redirect(RouteServiceProvider::HOME);
     }

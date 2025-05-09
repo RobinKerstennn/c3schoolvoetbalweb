@@ -9,7 +9,7 @@
                         <div class="flex justify-between items-center">
                             <div>
                                 <h3 class="text-lg font-semibold text-gray-800">{{ $team->name }}</h3>
-                                <p class="text-sm text-gray-700">Gemaakt door:{{ $user->name }}</p>
+                                <p class="text-sm text-gray-700">Gemaakt door: {{ $team->user->name }}</p>
                             </div>
                             <a href="{{ route('teams.edit', $team->id) }}"
                                 class="text-blue-600 hover:text-blue-800 font-medium">Bewerken</a>

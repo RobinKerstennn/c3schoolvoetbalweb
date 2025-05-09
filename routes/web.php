@@ -19,11 +19,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BaseController::class, 'home'])->name('home');
 
+Route::get('/home', [BaseController::class, 'home'])->name('home');
+
 Route::get('/user', function(){
     return redirect()->route('profiles.user', Auth::id());
 });
 
 Route::get('/user/{user}', [BaseController::class, 'user'])->name('profiles.user');
+Route::get('/user/{user}/edit', [BaseController::class, 'userEdit'])->name('users.edit');
 
 Route::post('/logout', [BaseController::class, 'logout'])->name('logout');
 Route::get('/dashboard', function () {
