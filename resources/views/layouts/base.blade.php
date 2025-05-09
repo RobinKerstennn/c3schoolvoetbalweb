@@ -35,9 +35,7 @@
                 <a href="{{ route('teams.mijnTeam') }}" class="hover:text-green-800">Mijn Team</a>
                 <a href="{{ route('teams.index') }}" class="hover:text-green-800">Team Beheer</a>
                 @if (Auth::user() && Auth::user()->role == 'admin')
-                <a href="#" class="hover:text-green-800">Admin Panel</a>
-                <a href="#" class="hover:text-green-800">Alle Teams</a>
-                <a href="#" class="hover:text-green-800">Alle Users</a>
+                <a href="{{route('admin.adminPanel')}}" class="hover:text-green-800">Admin Panel</a>
                 @endif
 
                 @if (Auth::user() && Auth::user()->role == 'referee')
@@ -54,8 +52,17 @@
     </header>
     <main class="w-4/5 mx-auto my-44 p-10 bg-white shadow-md rounded-lg">
         {{ $slot }}
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li class="text-black">{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
     </main>
-    <footer class="bg-green-500 text-white bottom-0">
+    <footer class="bg-green-500 text-white w-full fixed bottom-0">
         <div class="w-4/5 mx-auto py-4 flex justify-between items-center">
             <p>&copy; 2024 Robin en Abdi. All rights reserved.</p>
             <a href="#top" class="text-sm hover:text-green-800">Back to top</a>

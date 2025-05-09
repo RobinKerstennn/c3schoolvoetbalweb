@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Game;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,12 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
+    public function index(){
+        $games = Game::all();
+        return view('games.index', ['games' => $games]);
+    }
+
     /**
      * Display the user's profile form.
      */
