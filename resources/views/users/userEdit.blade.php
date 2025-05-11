@@ -7,12 +7,12 @@
 
             <div class="flex flex-col mb-10">
                 <label for="name">Gebruikersnaam</label>
-                <input type="text" name="name" id="name" value="{{$user->name}}">
+                <input type="text" name="name" id="name" value="{{$user->name}}" readonly>
             </div>
 
             <div class="flex flex-col mb-10">
                 <label for="email">Gebruikers email</label>
-                <input type="email" name="email" id="email" value="{{$user->email}}">
+                <input type="email" name="email" id="email" value="{{$user->email}}" readonly>
             </div>
 
             <div class="flex flex-col space-y-4">

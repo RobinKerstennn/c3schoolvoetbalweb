@@ -1,13 +1,13 @@
 <?php
-
-use App\Http\Controllers\BaseController;
-use Illuminate\Database\Console\Migrations\BaseCommand;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TournamentsController;
-use App\Models\Tournament;
 use Faker\Provider\Base;
+use App\Models\Tournament;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BaseController;
+use App\Http\Controllers\GamesController;
+use App\Http\Controllers\TeamsController;
+use App\Http\Controllers\ProfileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/tournaments', [TournamentsController::class, 'index'])->name('tournaments.index');
     Route::get('/admin/tournament/{tournament}/edit', [TournamentsController::class, 'edit'])->name('tournaments.edit');
     Route::put('/admin/tournament/{tournament}/edit', [TournamentsController::class, 'update'])->name('tournaments.update');
+    Route::get('/generateMatches', [GamesController::class, 'generateMatches'])->name('generate.matches');
 });
 
 Route::get('/user/{user}', [BaseController::class, 'user'])->name('profiles.user');
@@ -56,7 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-use App\Http\Controllers\TeamsController;
+use App\Http\Controllers\TournamentsController;
+use Illuminate\Database\Console\Migrations\BaseCommand;
 
 Route::get('/teambeheer', [TeamsController::class, 'index'])->name('teams.index');
 Route::post('/teambeheer', [TeamsController::class, 'store'])->name('teams.store');

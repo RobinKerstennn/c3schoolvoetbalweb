@@ -1,16 +1,25 @@
 <x-base-layout>
 
-    <div class="mb-8">
-        <a href="" class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 transition-all">
+    <div class="mb-8 flex justify-between w-2/5">
+        <a href="" class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">
             Make New Tournament
         </a>
+
+        <a href="{{route('generate.matches')}}" class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">
+            Generate Tournament
+        </a>
+
     </div>
 
     <div class="border-2 rounded-xl p-6 flex flex-col gap-4 mb-8 bg-gray-50 shadow-lg">
         @foreach ($games as $game)
             <div class="flex justify-between items-center border-b pb-2 mb-2 last:border-none last:pb-0 last:mb-0">
-                <h1 class="text-lg font-bold text-gray-800">{{ $game->team_1 }} vs {{ $game->team_2 }}</h1>
-                <h1 class="text-lg font-semibold text-gray-700">{{ $game->team_1_score }} - {{ $game->team_2_score }}
+                <h1 class="text-lg font-bold text-gray-800">
+                    {{$game->team_1}} vs {{$game->team_2}}
+                </h1>
+                <h1 class="text-lg font-semibold text-gray-700">
+                    {{$game->team_1_score}} - {{$game->team_2_score}}
+                </h1>
                 </h1>
             </div>
         @endforeach
