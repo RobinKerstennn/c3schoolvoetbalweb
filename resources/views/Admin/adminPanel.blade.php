@@ -1,7 +1,7 @@
 <x-base-layout>
 
     <div class="mb-8 flex justify-between w-2/5">
-        <a href="" class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">
+        <a href="{{route('tournaments.create')}}" class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">
             Make New Tournament
         </a>
 

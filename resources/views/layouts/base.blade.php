@@ -35,7 +35,25 @@
                 <a href="{{ route('teams.mijnTeam') }}" class="hover:text-green-800">Mijn Team</a>
                 <a href="{{ route('teams.index') }}" class="hover:text-green-800">Team Beheer</a>
                 @if (Auth::user() && Auth::user()->role == 'admin')
-                <a href="{{route('admin.adminPanel')}}" class="hover:text-green-800">Admin Panel</a>
+                <div class="relative group">
+                    <!-- Fixed Admin Panel Link -->
+                    <a href="{{ route('admin.adminPanel') }}" class="hover:text-green-800 inline-block group-hover:border-b-2 border-green-800">
+                        Admin Panel
+                    </a>
+
+                    <!-- Dropdown Menu -->
+                    <ul class="absolute left-0 w-48 mt-1 bg-green-800 rounded shadow-lg opacity-0 group-hover:opacity-100 duration-300">
+                        <li class="block text-white hover:text-gray-800 p-2">
+                            <a href="{{ route('users.index') }}">Users</a>
+                        </li>
+                        <li class="block text-white hover:text-gray-800 p-2">
+                            <a href="{{ route('tournaments.index') }}">Tournaments</a>
+                        </li>
+                        <li class="block text-white hover:text-gray-800 p-2">
+                            <a href="{{ route('teams.index') }}">Teams</a>
+                        </li>
+                    </ul>
+                </div>
                 @endif
 
                 @if (Auth::user() && Auth::user()->role == 'referee')
