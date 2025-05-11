@@ -39,11 +39,15 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/adminPanel', [BaseController::class, 'admin'])->name('admin.adminPanel');
 
+    Route::get('/referee/scores', [BaseController::class, 'scoresTonen'])->name('referee.scores');
+    Route::get('/referee/addScores', [BaseController::class, 'addScores'])->name('referee.addScores');
+
     Route::get('/teambeheer', [TeamsController::class, 'index'])->name('teams.index');
     Route::post('/teambeheer', [TeamsController::class, 'store'])->name('teams.store');
     Route::get('/mijn-team', [TeamsController::class, 'mijnTeam'])->name('teams.mijnTeam');
     Route::get('/teams/{team}/edit', [TeamsController::class, 'edit'])->name('teams.edit');
     Route::put('/teams/{team}', [TeamsController::class, 'update'])->name('teams.update');
+    Route::delete('/teams/{team}', [TeamsController::class, 'destroy'])->name('teams.delete');
 
     Route::get('/admin/tournaments', [TournamentsController::class, 'index'])->name('tournaments.index');
     Route::get('/admin/tournament/{tournament}/edit', [TournamentsController::class, 'edit'])->name('tournaments.edit');
