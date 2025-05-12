@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\ProfileController;
 use Faker\Provider\Base;
 use App\Models\Tournament;
 use Illuminate\Support\Facades\Auth;
@@ -54,6 +55,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/admin/tournament/{tournament}/edit', [TournamentsController::class, 'update'])->name('tournaments.update');
     Route::get('/admin/tournament/create', [TournamentsController::class, 'create'])->name('tournaments.create');
     Route::post('/admin/tournament/create', [TournamentsController::class, 'store'])->name('tournaments.store');
+
+    Route::get('/wedstrijdschema', [TeamsController::class, 'wedstrijdSchema'])->name('wedstrijdschema');
+
 
     Route::get('/generateMatches', [GamesController::class, 'generateMatches'])->name('generate.matches');
 });

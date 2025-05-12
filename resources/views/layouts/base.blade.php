@@ -32,7 +32,7 @@
 
                 @auth
                     <a href="{{ route('home') }}" class="hover:text-green-800">Home</a>
-                    <a href="#" class="hover:text-green-800">Wedstrijd Schema</a>
+                    <a href="{{ route('wedstrijdschema') }}" class="hover:text-green-800">Wedstrijd Schema</a>
                     <a href="#" class="hover:text-green-800">Scores</a>
                     <a href="#" class="hover:text-green-800">Leaderboard</a>
                     <a href="{{ route('teams.mijnTeam') }}" class="hover:text-green-800">Mijn Team</a>
