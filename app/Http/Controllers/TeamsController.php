@@ -52,9 +52,11 @@ class TeamsController extends Controller
         'name' => ['string', 'required']
        ]);
 
+       $players = explode(',', $request->players);
+
        $team->update([
         'name' => $request->name,
-        'players' => $request->players,
+        'players' => json_encode($players),
        ]);
         return redirect()->route('teams.index')->with('succes!', 'Team succesvol aangepast.');
 
@@ -63,5 +65,14 @@ class TeamsController extends Controller
     public function destroy(Team $team){
         $team->delete();
         return redirect()->route('teams.index');
+    }
+
+    public function wedstrijdSchema()
+    {
+        // Haal alle wedstrijden op met de benodigde relatie-informatie
+        $games = Game::with(['team1', 'team2'])->get();
+
+        // Stuur de wedstrijden naar de view
+        return view('wedstrijd.Wedstrijdschema', compact('games'));
     }
 }
