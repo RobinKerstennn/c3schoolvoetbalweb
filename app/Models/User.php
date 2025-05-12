@@ -44,8 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
     public function team(){
-        (Team::class);
         return $this->hasMany(Team::class);
     }
 }

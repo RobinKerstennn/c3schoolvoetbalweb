@@ -2,32 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Game;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use App\Models\Team;
-use Illuminate\View\View;
+use Illuminate\Http\Request;
 
-
-class ProfileController extends Controller
+class GamesController extends Controller
 {
-
-    public function index(){
-        $games = Game::all();
+    public function index()
+    {
+        // Alleen wedstrijden ophalen zonder scores
+        $games = Game::whereNull('team_1_score')
+            ->whereNull('team_2_score')
+            ->get();
         return view('games.index', ['games' => $games]);
     }
 
-    public function generateMatches(){
+
+
+
+    public function generateMatches()
+    {
         $teams = Team::all();
 
-        foreach($teams as $team_1){
+        foreach ($teams as $team_1) {
             $i = $team_1->id;
-            foreach($teams as $team_2){
+            foreach ($teams as $team_2) {
                 $j = $team_2->id;
-                if($j > $i){
+                if ($j > $i) {
                     $game = Game::create([
                         'team_1' => $i,
                         'team_2' => $j,
@@ -36,55 +37,41 @@ class ProfileController extends Controller
                 }
             }
         }
-
         $games = Game::all();
         return redirect()->route('home');
     }
 
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
+
+    public function scoresTonen()
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        $games = Game::all();
+        return view('referee.scores', ['games' => $games]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function addScores()
     {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        $games = Game::all();
+        return view('referee.addScores', ['games' => $games]);
     }
 
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
+    public function storeScores(Request $request, Game $game)
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
+        $request->validate([
+            'team1' => ['integer'],
+            'team2' => ['integer']
         ]);
 
-        $user = $request->user();
+        $game->update([
+            'team_1_score' => $request->team1,
+            'team_2_score' => $request->team2,
+        ]);
 
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        return redirect()->route('referee.scores');
     }
+    public function onlyScores()
+    {
+        $games = Game::all(['team_1', 'team_2', 'team_1_score', 'team_2_score']);
+        return view('scores.index', ['games' => $games]);
+    }
+
 }

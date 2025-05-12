@@ -22,7 +22,7 @@
                 @guest
                     <a href="#" class="hover:text-green-800">Home</a>
                     <a href="#" class="hover:text-green-800">Wedstrijd Schema</a>
-                    <a href="#" class="hover:text-green-800">Scores</a>
+                    <a href="{{ route('scores.only') }}" class="hover:text-green-800">Scores</a>
                     <a href="#" class="hover:text-green-800">Leaderboard</a>
                     <a href="{{ route('login') }}"
                         class="px-4 py-2 bg-white text-green-500 rounded-md hover:bg-green-600 hover:text-white">Login</a>
@@ -33,7 +33,7 @@
                 @auth
                     <a href="{{ route('home') }}" class="hover:text-green-800">Home</a>
                     <a href="{{ route('wedstrijdschema') }}" class="hover:text-green-800">Wedstrijd Schema</a>
-                    <a href="#" class="hover:text-green-800">Scores</a>
+                    <a href="{{ route('scores.only') }}" class="hover:text-green-800">Scores</a>
                     <a href="#" class="hover:text-green-800">Leaderboard</a>
                     <a href="{{ route('teams.mijnTeam') }}" class="hover:text-green-800">Mijn Team</a>
                     <a href="{{ route('teams.index') }}" class="hover:text-green-800">Team Beheer</a>

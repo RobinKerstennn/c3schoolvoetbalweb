@@ -40,7 +40,6 @@ class TeamsController extends Controller
         // Maak een nieuw team aan, gekoppeld aan de ingelogde gebruiker
         Team::create([
             'name' => $request->name,
-             'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('teams.index')->with('success', 'Team succesvol aangemaakt!');
@@ -52,7 +51,7 @@ class TeamsController extends Controller
         'name' => ['string', 'required']
        ]);
 
-       $players = explode(',', $request->players);
+       $players = explode(", ", $request->players);
 
        $team->update([
         'name' => $request->name,
