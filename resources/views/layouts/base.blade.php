@@ -37,33 +37,33 @@
                 <a href="{{ route('leaderboard.home') }}" class="hover:text-green-800">Leaderboard</a>
                 <a href="{{ route('teams.mijnTeam') }}" class="hover:text-green-800">Mijn Team</a>
 
-        @if (Auth::user() && Auth::user()->role == 'admin')
                         <a href="{{ route('teams.index') }}" class="hover:text-green-800">Team Beheer</a>
-
+            
+            @if (Auth::user() && Auth::user()->role == 'admin')
             <div class="relative group">
                  <a href="{{ route('admin.adminPanel') }}"
             class="hover:text-green-800 inline-block group-hover:border-b-2 border-green-800">
             Admin Panel
              </a>
 
-            <ul class="absolute left-0 w-48 mt-1 bg-green-800 rounded shadow-lg opacity-0 group-hover:opacity-100 duration-300">
-            <li class="block text-white hover:text-gray-800 p-2">
-                <a href="{{ route('users.index') }}">Users</a>
-            </li>
-            <li class="block text-white hover:text-gray-800 p-2">
-                <a href="{{ route('tournaments.index') }}">Tournaments</a>
-            </li>
-            <li class="block text-white hover:text-gray-800 p-2">
-                <a href="{{ route('teams.index') }}">Teams</a>
-            </li>
-        </ul>
-    </div>
-@endif
+<ul
+                        class="absolute left-0 w-48 mt-1 bg-green-800 rounded shadow-lg opacity-0 group-hover:opacity-100 duration-300">
+                        <li class="block text-white hover:text-gray-800 p-2">
+                            <a href="{{ route('users.index') }}">Users</a>
+                        </li>
+                        <li class="block text-white hover:text-gray-800 p-2">
+                            <a href="{{ route('tournaments.index') }}">Tournaments</a>
+                        </li>
+                        <li class="block text-white hover:text-gray-800 p-2">
+                            <a href="{{ route('teams.index') }}">Teams</a>
+                        </li>
+                    </ul>
+                </div>
+                @endif
 
-@if (Auth::user() && Auth::user()->role == 'referee')
-    <a href="{{ route('referee.scores') }}" class="hover:text-green-800">Add Scores</a>
-@endif
-
+ @if (Auth::user() && Auth::user()->role == 'referee')
+                <a href="{{ route('referee.scores') }}" class="hover:text-green-800">Add Scores</a>
+                @endif
                 <form action="{{ route('logout') }}" method="post" class="inline">
                     @csrf
                     <button type="submit"
@@ -83,13 +83,13 @@
     <main class="w-4/5 mx-auto my-44 p-10 bg-white shadow-md rounded-lg">
         {{ $slot }}
         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li class="text-black">{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+             <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li class="text-black">{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
         @endif
     </main>
     <footer class="bg-green-500 text-white w-full fixed bottom-0">

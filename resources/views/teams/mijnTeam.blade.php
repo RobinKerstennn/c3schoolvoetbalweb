@@ -12,4 +12,5 @@
             @endforeach
         @endif
     @endforeach
+    <a href="">Voeg team aan tournament</a>
 </x-base-layout>

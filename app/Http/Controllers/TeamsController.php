@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TeamsController extends Controller
 {
-    public function index()
+    public function adminTeambeheer()
     {
         $user = Auth::user();
         $teams = Team::all();
@@ -24,6 +24,14 @@ class TeamsController extends Controller
         }
         return view('teams.edit', ['team' => $team]);
     }
+
+    public function index()
+    {
+        $user = Auth::user();
+        $teams = Team::where('user_id', $user->id)->get();
+        return view('teams.teambeheer', ['teams' => $teams]);
+    }
+
 
     public function mijnTeam()
     {
@@ -49,21 +57,22 @@ class TeamsController extends Controller
 
     public function update(Request $request, Team $team)
     {
-       $request->validate([
-        'name' => ['string', 'required']
-       ]);
+        $request->validate([
+            'name' => ['string', 'required']
+        ]);
 
-       $players = explode(", ", $request->players);
+        $players = explode(", ", $request->players);
 
-       $team->update([
-        'name' => $request->name,
-        'players' => json_encode($players),
-       ]);
+        $team->update([
+            'name' => $request->name,
+            'players' => json_encode($players),
+        ]);
         return redirect()->route('teams.index')->with('succes!', 'Team succesvol aangepast.');
 
     }
 
-    public function destroy(Team $team){
+    public function destroy(Team $team)
+    {
         $team->delete();
         return redirect()->route('teams.index');
     }
@@ -77,12 +86,14 @@ class TeamsController extends Controller
         return view('wedstrijd.Wedstrijdschema', compact('games'));
     }
 
-    public function tournaments(){
+    public function tournaments()
+    {
         $tournaments = Tournament::all();
         return view('wedstrijd.tournament', ['tournaments' => $tournaments]);
     }
 
-    public function tournamentsView(Tournament $tournament){
+    public function tournamentsView(Tournament $tournament)
+    {
         return view('wedstrijd.tournamentsView', ['tournament' => $tournament]);
     }
 }
