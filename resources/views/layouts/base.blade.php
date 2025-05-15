@@ -23,7 +23,7 @@
                     <a href="#" class="hover:text-green-800">Home</a>
                     <a href="#" class="hover:text-green-800">Wedstrijd Schema</a>
                     <a href="{{ route('scores.only') }}" class="hover:text-green-800">Scores</a>
-                    <a href="#" class="hover:text-green-800">Leaderboard</a>
+                <a href="{{ route('leaderboard.home') }}" class="hover:text-green-800">Leaderboard</a>
                     <a href="{{ route('login') }}"
                         class="px-4 py-2 bg-white text-green-500 rounded-md hover:bg-green-600 hover:text-white">Login</a>
                     <a href="{{ route('register') }}"
@@ -34,7 +34,7 @@
                 <a href="{{ route('home') }}" class="hover:text-green-800">Home</a>
                 <a href="{{ route('wedstrijdschema') }}" class="hover:text-green-800">Wedstrijd Schema</a>
                 <a href="{{ route('scores.only') }}" class="hover:text-green-800">Scores</a>
-                <a href="#" class="hover:text-green-800">Leaderboard</a>
+                <a href="{{ route('leaderboard.home') }}" class="hover:text-green-800">Leaderboard</a>
                 <a href="{{ route('teams.mijnTeam') }}" class="hover:text-green-800">Mijn Team</a>
                 <a href="{{ route('teams.index') }}" class="hover:text-green-800">Team Beheer</a>
         @if (Auth::user() && Auth::user()->role == 'admin')

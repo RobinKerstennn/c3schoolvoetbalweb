@@ -4,21 +4,55 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use App\Models\Team;
+use App\Models\Tournament;
 use Illuminate\Http\Request;
 
 class GamesController extends Controller
 {
-      public function index()
-{
-    // Alleen wedstrijden ophalen zonder scores
-    $games = Game::whereNull('team_1_score')
-                ->whereNull('team_2_score')
-                ->get();
-    return view('games.index', ['games' => $games]);
-}
+    public function index()
+    {
+        $games = Game::whereNull('team_1_score')
+            ->whereNull('team_2_score')
+            ->get();
+        return view('games.index', ['games' => $games]);
+    }
 
 
+    public function leaderboard($tournament_id)
+    {
+        $games = Game::where('tournament_id', $tournament_id)
+            ->get();
 
+        $teamScores = [];
+
+        foreach ($games as $game) {
+
+            if (!isset($teamScores[$game->team_1])) {
+                $teamScores[$game->team_1] = 0;
+            }
+            $teamScores[$game->team_1] += $game->team_1_score > $game->team_2_score ? 3 : ($game->team_1_score === $game->team_2_score ? 1 : 0);
+
+            if (!isset($teamScores[$game->team_2])) {
+                $teamScores[$game->team_2] = 0;
+            }
+            $teamScores[$game->team_2] += $game->team_2_score > $game->team_1_score ? 3 : ($game->team_1_score === $game->team_2_score ? 1 : 0);
+        }
+
+        $teams = Team::whereIn('id', array_keys($teamScores))->get();
+
+        $leaderboard = $teams->map(function ($team) use ($teamScores) {
+            $team->score = $teamScores[$team->id];
+            return $team;
+        })->sortByDesc('score'); 
+
+        return view('games.leaderboard', ['leaderboard' => $leaderboard]);
+    }
+
+    public function show()
+    {
+        $tournaments = Tournament::all();
+        return view('games.leaderboardhome', ['tournaments' => $tournaments]);
+    }
 
     public function generateMatches()
     {
@@ -69,10 +103,10 @@ class GamesController extends Controller
         return redirect()->route('referee.scores');
     }
 
-   public function onlyScores()
-{
-    $games = Game::all(['team_1', 'team_2', 'team_1_score', 'team_2_score']);
-    return view('scores.index', ['games' => $games]);
-}
+    public function onlyScores()
+    {
+        $games = Game::all(['team_1', 'team_2', 'team_1_score', 'team_2_score']);
+        return view('scores.index', ['games' => $games]);
+    }
 
 }

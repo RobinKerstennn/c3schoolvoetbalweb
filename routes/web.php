@@ -66,6 +66,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/generateMatches', action: [GamesController::class, 'generateMatches'])->name('generate.matches');
     Route::get('/scores-only', [GamesController::class, 'onlyScores'])->name('scores.only');
+
+    Route::get('/games/{tournament_id}/leaderboard', [GamesController::class, 'leaderboard'])->name('games.leaderboard');
+    Route::get('/leaderboard/home', [GamesController::class, 'show'])->name('leaderboard.home');
 });
 
 Route::get('/user/{user}', [BaseController::class, 'user'])->name('profiles.user');
