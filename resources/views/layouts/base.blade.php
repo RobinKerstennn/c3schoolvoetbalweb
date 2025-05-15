@@ -22,7 +22,7 @@
                 @guest
                     <a href="#" class="hover:text-green-800">Home</a>
                     <a href="#" class="hover:text-green-800">Wedstrijd Schema</a>
-                       <a href="{{ route('scores.only') }}" class="hover:text-green-800">Scores</a>
+                    <a href="{{ route('scores.only') }}" class="hover:text-green-800">Scores</a>
                     <a href="#" class="hover:text-green-800">Leaderboard</a>
                     <a href="{{ route('login') }}"
                         class="px-4 py-2 bg-white text-green-500 rounded-md hover:bg-green-600 hover:text-white">Login</a>
@@ -31,48 +31,48 @@
                 @endguest
 
                 @auth
-                    <a href="{{ route('home') }}" class="hover:text-green-800">Home</a>
-                    <a href="{{ route('wedstrijdschema') }}" class="hover:text-green-800">Wedstrijd Schema</a>
-                      <a href="{{ route('scores.only') }}" class="hover:text-green-800">Scores</a>
-                    <a href="#" class="hover:text-green-800">Leaderboard</a>
-                    <a href="{{ route('teams.mijnTeam') }}" class="hover:text-green-800">Mijn Team</a>
-                    <a href="{{ route('teams.index') }}" class="hover:text-green-800">Team Beheer</a>
-                    @if (Auth::user() && Auth::user()->role == 'admin')
-                        <div class="relative group">
-                            <!-- Fixed Admin Panel Link -->
-                            <a href="{{ route('admin.adminPanel') }}"
-                                class="hover:text-green-800 inline-block group-hover:border-b-2 border-green-800">
-                                Admin Panel
-                            </a>
+                <a href="{{ route('home') }}" class="hover:text-green-800">Home</a>
+                <a href="{{ route('wedstrijdschema') }}" class="hover:text-green-800">Wedstrijd Schema</a>
+                <a href="{{ route('scores.only') }}" class="hover:text-green-800">Scores</a>
+                <a href="#" class="hover:text-green-800">Leaderboard</a>
+                <a href="{{ route('teams.mijnTeam') }}" class="hover:text-green-800">Mijn Team</a>
+                <a href="{{ route('teams.index') }}" class="hover:text-green-800">Team Beheer</a>
+        @if (Auth::user() && Auth::user()->role == 'admin')
+            <div class="relative group">
+                 <a href="{{ route('admin.adminPanel') }}"
+            class="hover:text-green-800 inline-block group-hover:border-b-2 border-green-800">
+            Admin Panel
+             </a>
 
-                            <!-- Dropdown Menu -->
-                            <ul
-                                class="absolute left-0 w-48 mt-1 bg-green-800 rounded shadow-lg opacity-0 group-hover:opacity-100 duration-300">
-                                <li class="block text-white hover:text-gray-800 p-2">
-                                    <a href="{{ route('users.index') }}">Users</a>
-                                </li>
-                                <li class="block text-white hover:text-gray-800 p-2">
-                                    <a href="{{ route('tournaments.index') }}">Tournaments</a>
-                                </li>
-                                <li class="block text-white hover:text-gray-800 p-2">
-                                    <a href="{{ route('teams.index') }}">Teams</a>
-                                </li>
-                            </ul>
-                        </div>
-                    @endif
+                 <ul class="absolute left-0 w-48 mt-1 bg-green-800 rounded shadow-lg opacity-0 group-hover:opacity-100 duration-300">
+            <li class="block text-white hover:text-gray-800 p-2">
+                <a href="{{ route('users.index') }}">Users</a>
+            </li>
+            <li class="block text-white hover:text-gray-800 p-2">
+                <a href="{{ route('tournaments.index') }}">Tournaments</a>
+            </li>
+            <li class="block text-white hover:text-gray-800 p-2">
+                <a href="{{ route('teams.index') }}">Teams</a>
+            </li>
+        </ul>
+    </div>
+@endif
 
-                    @if (Auth::user() && Auth::user()->role == 'referee')
-                        <a href="{{ route('referee.scores') }}" class="hover:text-green-800">Add Scores</a>
-                    @endif
-                    <form action="{{ route('logout') }}" method="post" class="inline">
-                        @csrf
-                        <button type="submit"
-                            class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">Logout</button>
-                    </form>
+@if (Auth::user() && Auth::user()->role == 'referee')
+    <a href="{{ route('referee.scores') }}" class="hover:text-green-800">Add Scores</a>
+@endif
+
+                <form action="{{ route('logout') }}" method="post" class="inline">
+                    @csrf
+                    <button type="submit"
+                        class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">Logout</button>
+                </form>
                 @endauth
 
-                    <li class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 @auth logged-in @else logged-out @endauth ">
-                    <a href="{{ route('profile.edit') }}" class="btn btn-primary">Profiel aanpassen</a>
+                <a class=" size-24 rounded- px-4 py-2 text-white rounded-xl btn btn-primary @auth logged-in @else logged-out @endauth "
+                    href="{{ route('profile.edit') }}">
+                    <img class="rounded-full" src="{{ asset('img/profile.jpg') }}" alt="Avatar" class="avatar">
+                </a>
 
             </div>
     </header>
