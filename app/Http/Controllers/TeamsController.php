@@ -40,6 +40,7 @@ class TeamsController extends Controller
         // Maak een nieuw team aan, gekoppeld aan de ingelogde gebruiker
         Team::create([
             'name' => $request->name,
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('teams.index')->with('success', 'Team succesvol aangemaakt!');
