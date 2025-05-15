@@ -14,7 +14,7 @@ class TeamsController extends Controller
     {
         $user = Auth::user();
         $teams = Team::all();
-        return view('teams.teambeheer', ['teams' => $teams, 'user' => $user]);
+        return view('admin.teambeheer', ['teams' => $teams, 'user' => $user]);
     }
 
     public function edit(Team $team)
