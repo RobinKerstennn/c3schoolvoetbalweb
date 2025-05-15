@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Game;
 use App\Models\Team;
+use App\Models\Tournament;
 use Illuminate\Support\Facades\Auth;
 
 class TeamsController extends Controller
@@ -74,5 +75,14 @@ class TeamsController extends Controller
 
         // Stuur de wedstrijden naar de view
         return view('wedstrijd.Wedstrijdschema', compact('games'));
+    }
+
+    public function tournaments(){
+        $tournaments = Tournament::all();
+        return view('wedstrijd.tournament', ['tournaments' => $tournaments]);
+    }
+
+    public function tournamentsView(Tournament $tournament){
+        return view('wedstrijd.tournamentsView', ['tournament' => $tournament]);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\ProfileController;
 use Faker\Provider\Base;
 use App\Models\Tournament;
@@ -59,12 +60,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/tournament/create', [TournamentsController::class, 'store'])->name('tournaments.store');
 
     Route::get('/wedstrijdschema', [TeamsController::class, 'wedstrijdSchema'])->name('wedstrijdschema');
+    Route::get('/wedstrijdschema/tournament', [TeamsController::class, 'tournaments'])->name('wedstrijdschema.tournament');
+    Route::get('/wedstrijdschema/tournamentsView/{tournament}', [TeamsController::class, 'tournamentsView'])->name('wedstrijdschema.tournaments.view');
 
 
     Route::get('/generateMatches', action: [GamesController::class, 'generateMatches'])->name('generate.matches');
     Route::get('/scores-only', [GamesController::class, 'onlyScores'])->name('scores.only');
-
-
 });
 
 Route::get('/user/{user}', [BaseController::class, 'user'])->name('profiles.user');
