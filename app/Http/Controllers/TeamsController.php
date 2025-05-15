@@ -85,4 +85,13 @@ class TeamsController extends Controller
     public function tournamentsView(Tournament $tournament){
         return view('wedstrijd.tournamentsView', ['tournament' => $tournament]);
     }
+
+    public function tournaments(){
+        $tournaments = Tournament::all();
+        return view('wedstrijd.tournament', ['tournaments' => $tournaments]);
+    }
+
+    public function tournamentsView(Tournament $tournament){
+        return view('wedstrijd.tournamentsView', ['tournament' => $tournament]);
+    }
 }
