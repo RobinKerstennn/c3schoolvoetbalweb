@@ -42,17 +42,20 @@ class GamesController extends Controller
     }
 
 
-   public function scoresTonen(){
+    public function scoresTonen()
+    {
         $games = Game::all();
         return view('referee.scores', ['games' => $games]);
     }
 
-    public function addScores(){
+    public function addScores()
+    {
         $games = Game::all();
         return view('referee.addScores', ['games' => $games]);
     }
 
-    public function storeScores(Request $request, Game $game){
+    public function storeScores(Request $request, Game $game)
+    {
         $request->validate([
             'team1' => ['integer'],
             'team2' => ['integer']
@@ -65,13 +68,10 @@ class GamesController extends Controller
 
         return redirect()->route('referee.scores');
     }
-    
+
     public function onlyScores()
     {
         $games = Game::all(['team_1', 'team_2', 'team_1_score', 'team_2_score']);
         return view('scores.index', ['games' => $games]);
     }
-
-
-
 }
