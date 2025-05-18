@@ -11,14 +11,17 @@ class GamesController extends Controller
 {
     public function index()
     {
+        // Alleen wedstrijden ophalen zonder scores
         $games = Game::whereNull('team_1_score')
             ->whereNull('team_2_score')
             ->get();
+
         return view('games.index', ['games' => $games]);
     }
 
 
     public function leaderboard($tournament_id)
+
     {
         $games = Game::where('tournament_id', $tournament_id)
             ->get();
@@ -43,7 +46,7 @@ class GamesController extends Controller
         $leaderboard = $teams->map(function ($team) use ($teamScores) {
             $team->score = $teamScores[$team->id];
             return $team;
-        })->sortByDesc('score'); 
+        })->sortByDesc('score');
 
         return view('games.leaderboard', ['leaderboard' => $leaderboard]);
     }
@@ -106,7 +109,17 @@ class GamesController extends Controller
     public function onlyScores()
     {
         $games = Game::all(['team_1', 'team_2', 'team_1_score', 'team_2_score']);
+
         return view('scores.index', ['games' => $games]);
+    }
+    // Haal alle games zonder scores in JSON-formaat
+    public function getGamesJson()
+    {
+        $games = Game::whereNull('team_1_score')
+            ->whereNull('team_2_score')
+            ->get();
+
+        return response()->json($games);
     }
 
 }
