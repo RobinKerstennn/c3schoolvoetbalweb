@@ -37,6 +37,7 @@ class TournamentsController extends Controller
     {
         return view('tournaments.create');
     }
+    
 
     public function store(Request $request)
     {

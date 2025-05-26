@@ -82,7 +82,7 @@
     <div class="mt-12">
         <h2 class="text-xl font-bold text-gray-800 mb-4">Teams die met dit toernooi meedoen</h2>
         <ul class="list-disc pl-6 text-gray-700">
-            @foreach ($tournament->teams as $team)
+           @foreach ($tournament->teams ?? [] as $team)
                 <li>{{ $team->name }}</li>
             @endforeach
         </ul>

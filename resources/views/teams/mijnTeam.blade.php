@@ -16,7 +16,7 @@
 
                 <p class="text-lg font-semibold underline mb-4">Players / Spelers</p>
                 <ul class="space-y-2 pl-4">
-                    @foreach ($players as $player)
+                   @foreach ($players ?? [] as $player)
                     <li class="text-green-800 bg-green-200 p-2 rounded-lg shadow-md">{{$player}}</li>
                     @endforeach
                 </ul>
